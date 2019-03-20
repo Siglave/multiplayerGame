@@ -1,0 +1,41 @@
+extends layout.pug
+block append javascript
+    script(src='js/home.js')
+block content
+    div(style="height:80vh;display:flex;justify-content:center;align-items:center")
+        .container
+            div(style="display:flex;justify-content:center;align-items:center")
+                div(style="width:100%;display:flex;justify-content:center")
+                    div
+                        h1 Jeu multijoueur 
+                        h2(style="font-size:1.5em") by Pierre Rouzaud 🔥
+                div(style="width:100%")
+                    if isAuth
+                        a(href="/game").btn.btn-primary.btn-lg Jouer
+                    else
+                        ul#pills-tab.nav.nav-tabs.mb-3(role='tablist')
+                            li.nav-item
+                                a#pills-home-tab.nav-link.active(data-toggle='pill', href='#pills-home', role='tab', aria-controls='pills-home', aria-selected='true') Connexion
+                            li.nav-item
+                                a#pills-profile-tab.nav-link(data-toggle='pill', href='#pills-profile', role='tab', aria-controls='pills-profile', aria-selected='false') Inscription
+                        #pills-tabContent.tab-content
+                            #pills-home.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='pills-home-tab')
+                                form#login-form(action="/login", method="post")
+                                    .form-group
+                                        label(for='username') 👤 Pseudo
+                                        input.form-control(name='username', type='text', placeholder='nom')
+                                    .form-group
+                                        label(for='password') 🔑 Mot de passe
+                                        input.form-control(name='password', type='password')
+                                    button#login-button.btn.btn-primary.btn-lg(type='submit') Connexion
+                                    #res-login-form
+                            #pills-profile.tab-pane.fade(role='tabpanel', aria-labelledby='pills-profile-tab')
+                                form#signup-form
+                                    .form-group
+                                        label(for='username') 👤 Pseudo
+                                        input.form-control(name='username', type='text', placeholder='nom')
+                                    .form-group
+                                        label(for='password') 🔑 Mot de passe
+                                        input.form-control(name='password', type='password')
+                                    button#signup-button.btn.btn-primary.btn-lg(type='submit') Inscription
+                                    #res-signup-form

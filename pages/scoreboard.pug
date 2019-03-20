@@ -1,0 +1,21 @@
+extends layout.pug
+
+block content
+    .container
+        div(style="margin-top:48px")
+            h1(style="margin:24px 0px") 💯 Scoreboard
+            table.table
+                thead.thead-dark
+                    tr
+                        th(scope='col') 👤 Pseudo
+                        th(scope='col') 🏆 Parties Gagnées
+                        th(scope='col') 😡 Parties Perdues
+                tbody
+                    each user in users
+                        tr
+                            td
+                                span.badge.badge-secondary= user.username
+                            td
+                                span.badge.badge-success= user.won
+                            td
+                                span.badge.badge-light= user.lost

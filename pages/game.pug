@@ -1,0 +1,29 @@
+extends layout.pug
+block append javascript
+    script(src='/socket.io/socket.io.js')
+    script(src='/js/game.js')
+block content
+        .container
+            if user
+                h1#player-info(style="margin:48px 0px", data-id-player=user._id, data-name-player=user.username)= user.username
+                div
+                    #pre-game-section
+                        div
+                            div(style="margin:48px 0px")
+                                h2(style="margin:16px 0px; font-size:1.5em") 📜 Règle du jeu
+                                p Le but du jeu est de survivre le plus longtemps possible en repoussant les balles grâce au bouclier !
+                                p Déplacement : ⬅️ ⬆️ ➡️ ⬇️
+                                p Bouclier : HAUT <kbd>Z</kbd> BAS <kbd>S</kbd> GAUCHE <kbd>Q</kbd>  DROITE <kbd>D</kbd>
+                            div(style="margin:48px 0px")
+                                h2(style="margin:16px 0px; font-size:1.5em") Jouer
+                                form#player-form
+                                    .form-group
+                                        label(for='color') Couleur
+                                        input#color.form-control(name='color', type='color')
+                                    button#submit-player-button.btn.btn-primary.btn-lg(type='submit') ⚔️ Rejoindre une partie
+                    #game-section(style="display:flex;justify-content:center")
+                        div
+                            button#replay.btn.btn-primary.btn-lg.btn-block Rejouer
+                            canvas#canvas-game(width='600', height='700',style="display:block")
+            else
+                h1#player-info(style="margin:48px 0px") Vous devez vous connecter
